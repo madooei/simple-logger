@@ -1,4 +1,4 @@
-# LogManager Component
+# Simple Logger
 
 A lightweight, flexible logging system for ContentSmith that supports namespace-based logging with different log levels.
 
@@ -16,7 +16,7 @@ A lightweight, flexible logging system for ContentSmith that supports namespace-
 ### Basic Usage
 
 ```typescript
-import { LogManagerImpl } from './components/log-manager';
+import { LogManagerImpl } from '@coursebook/simple-logger';
 
 // Get the logger instance
 const logManager = LogManagerImpl.getInstance();
@@ -189,19 +189,19 @@ Now you can import the package in your project as usual.
    npm pack
    ```
 
-   This will generate a file like `madooei-simple-logger-1.0.0.tgz`. (Or whatever version you have.)
+   This will generate a file like `coursebook-simple-logger-1.0.0.tgz`. (Or whatever version you have.)
    You can find the tarball in the same directory as your `package.json`.
 
 2. In your other project, install the tarball:
 
    ```bash
-   npm install /absolute/path/to/simple-logger/madooei-simple-logger-1.0.0.tgz
+   npm install /absolute/path/to/simple-logger/coursebook-simple-logger-1.0.0.tgz
    ```
 
    Or, if you copy the tarball into your project directory:
 
    ```bash
-   npm install ./madooei-simple-logger-1.0.0.tgz
+   npm install ./coursebook-simple-logger-1.0.0.tgz
    ```
 
 This method installs the package exactly as it would be published to npm, making it ideal for final testing. After this installation, you must have the package in your `node_modules` directory, and you can import it as usual. You will also see the package in your `package.json` file as a dependency:
@@ -209,7 +209,7 @@ This method installs the package exactly as it would be published to npm, making
 ```json
 {
   "dependencies": {
-    "@coursebook/simple-logger": "file:madooei-simple-logger-1.0.0.tgz"
+    "@coursebook/simple-logger": "file:coursebook-simple-logger-1.0.0.tgz"
   }
 }
 ```
