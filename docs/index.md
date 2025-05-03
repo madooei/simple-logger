@@ -126,7 +126,7 @@ export class FileManager {
 Once published to NPM, the package can be installed using:
 
 ```bash
-npm install @madooei/simple-logger
+npm install @coursebook/simple-logger
 ```
 
 This template is particularly useful for creating packages that are intended to be used locally so read the instructions below for local development.
@@ -154,13 +154,13 @@ There are three ways to use this package locally:
 2. In your other project where you want to use this package:
 
    ```bash
-   npm link @madooei/simple-logger
+   npm link @coursebook/simple-logger
    ```
 
 3. Import the package in your project:
 
    ```typescript
-   import { LogManagerImpl } from '@madooei/simple-logger';
+   import { LogManagerImpl } from '@coursebook/simple-logger';
    ```
 
 #### Option 2: Using local path
@@ -170,7 +170,7 @@ In your other project's `package.json`, add this package as a dependency using t
 ```json
 {
   "dependencies": {
-    "@madooei/simple-logger": "file:/path/to/simple-logger"
+    "@coursebook/simple-logger": "file:/path/to/simple-logger"
   }
 }
 ```
@@ -209,7 +209,7 @@ This method installs the package exactly as it would be published to npm, making
 ```json
 {
   "dependencies": {
-    "@madooei/simple-logger": "file:madooei-simple-logger-1.0.0.tgz"
+    "@coursebook/simple-logger": "file:madooei-simple-logger-1.0.0.tgz"
   }
 }
 ```

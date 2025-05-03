@@ -1,6 +1,6 @@
-# Simple Example Usage For `@madooei/simple-logger`
+# Simple Example Usage For `@coursebook/simple-logger`
 
-This is a simple example of how to use the `@madooei/simple-logger` package in a local project. The example demonstrates how to set up a basic logging system using the package.
+This is a simple example of how to use the `@coursebook/simple-logger` package in a local project. The example demonstrates how to set up a basic logging system using the package.
 
 ## Setup
 
@@ -16,11 +16,11 @@ npm run start
 
 ## How does it work?
 
-The `@madooei/simple-logger` is a local package that is installed using the `file:` protocol; see the `dependencies` section in the `package.json` file:
+The `@coursebook/simple-logger` is a local package that is installed using the `file:` protocol; see the `dependencies` section in the `package.json` file:
 
 ```json
   "dependencies": {
-    "@madooei/simple-logger": "file:../../packages/simple-logger"
+    "@coursebook/simple-logger": "file:../../packages/simple-logger"
   },
 ```
 
@@ -28,7 +28,7 @@ If you want to use this package through NPM, you can do so by changing the `depe
 
 ```json
   "dependencies": {
-    "@madooei/simple-logger": "latest"
+    "@coursebook/simple-logger": "latest"
   },
 ```
 

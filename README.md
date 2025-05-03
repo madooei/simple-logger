@@ -1,15 +1,20 @@
 # Simple Logger
 
-This repository is a minimal template for TypeScript packages, designed for both internal and open-source use. It is structured as a monorepo to keep packages, examples, and documentation organized and portable.
+This repository contains `@coursebook/simple-logger`, a lightweight, flexible logging system for CourseBook that supports namespace-based logging with different log levels.
+
+> [!TIP]
+> For package-specific instructions (installation, usage, development, publishing, etc.), see the README in `packages/simple-logger/`.
 
 ## Repository Structure
+
+This repository follows the [example-package](https://github.com/madooei/example-package) template for building minimal TypeScript packages. The codebase contains the following directories:
 
 - `packages` — Contains the primary package(s) for this repository (e.g., `example-package`). Each package is self-contained and can be copied out and used independently.
 - `examples` — Contains examples of how to use the packages. Each example is a minimal, standalone project.
 - `docs` — Contains documentation for the primary package(s) and, optionally, for examples or other aspects of the repo.
 - `.github` — Contains GitHub-specific files, such as workflows and issue templates.
 
-## Philosophy
+### Philosophy
 
 - **Portability:** Each package and example is self-contained. You can copy any package or example out of this repo and use it as a standalone project. It is generally assumed that you open each package in your editor to work on it (rather than opening the entire repo).
 - **Simplicity:** We intentionally avoid monorepo tools (like workspaces or shared config files) to keep things simple and portable.
@@ -24,7 +29,3 @@ This repository is a minimal template for TypeScript packages, designed for both
 ## Contributing
 
 Feel free to open issues or pull requests! If you want to add a new package or example, just create a new folder in the appropriate directory and include a README. (Check [`CONTRIBUTING.md`](CONTRIBUTING.md) for more information.)
-
----
-
-For package-specific instructions (installation, usage, development, publishing, etc.), see the README in `packages/simple-logger/`.

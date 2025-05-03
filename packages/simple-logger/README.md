@@ -45,7 +45,7 @@ A lightweight, flexible logging system for ContentSmith that supports namespace-
 
 ## Package Name and Scope
 
-This package uses the npm scope `@madooei`. When using this template for your own package:
+This package uses the npm scope `@coursebook`. When using this template for your own package:
 
 1. Change the package name in `package.json`:
    ```json

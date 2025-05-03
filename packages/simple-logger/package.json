@@ -1,5 +1,5 @@
 {
-  "name": "@madooei/simple-logger",
+  "name": "@coursebook/simple-logger",
   "version": "0.1.0",
   "description": "A simple logger for TypeScript projects",
   "main": "dist/index.js",
@@ -30,7 +30,7 @@
     "release": "standard-version"
   },
   "keywords": [],
-  "author": "Ali Madooei <madooei@jhu.edu>",
+  "author": "Ali Madooei",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^22.15.3",
@@ -48,10 +48,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/madooei/simple-logger.git"
+    "url": "https://github.com/proj-coursebook/simple-logger.git"
   },
-  "homepage": "https://madooei.github.io/simple-logger/",
+  "homepage": "https://proj-coursebook.github.io/simple-logger/",
   "bugs": {
-    "url": "https://github.com/madooei/simple-logger/issues"
+    "url": "https://github.com/proj-coursebook/simple-logger/issues"
   }
 }
