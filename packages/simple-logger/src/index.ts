@@ -1,4 +1,11 @@
-import type { LogLevel, Logger, LogManager, NamespacePattern } from "./types";
+import type {
+  LogLevel,
+  Logger,
+  LogManager,
+  NamespacePattern,
+  LogManagerError,
+  LogManagerErrorType,
+} from "./types";
 
 class LoggerImpl implements Logger {
   constructor(
@@ -135,3 +142,12 @@ export class LogManagerImpl implements LogManager {
     }
   }
 }
+
+export type {
+  LogLevel,
+  Logger,
+  LogManager,
+  NamespacePattern,
+  LogManagerError,
+  LogManagerErrorType,
+};
