@@ -9,7 +9,7 @@ This repository contains `@coursebook/simple-logger`, a lightweight, flexible lo
 
 This repository follows the [example-package](https://github.com/madooei/example-package) template for building minimal TypeScript packages. The codebase contains the following directories:
 
-- `packages` — Contains the primary package(s) for this repository (e.g., `example-package`). Each package is self-contained and can be copied out and used independently.
+- `packages` — Contains the primary package(s) for this repository (e.g., `simple-logger`). Each package is self-contained and can be copied out and used independently.
 - `examples` — Contains examples of how to use the packages. Each example is a minimal, standalone project.
 - `docs` — Contains documentation for the primary package(s) and, optionally, for examples or other aspects of the repo.
 - `.github` — Contains GitHub-specific files, such as workflows and issue templates.
