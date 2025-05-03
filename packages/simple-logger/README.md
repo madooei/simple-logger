@@ -2,6 +2,9 @@
 
 A lightweight, flexible logging system for ContentSmith that supports namespace-based logging with different log levels.
 
+> [!TIP]
+> Refer to this package's [docs](https://proj-coursebook.github.io/simple-logger/) for how to use it.
+
 ## Features
 
 - **Namespace-based Logging**: Organize logs by component and operation
@@ -115,4 +118,5 @@ This repository is set up to publish the package to NPM automatically using GitH
 - **What does it do?**
   - Installs dependencies, runs all validation (type-check, lint, format, tests), builds the package, and publishes to NPM if all checks pass.
 
-**Note:** You must add your NPM token as a secret named `NPM_TOKEN` in your GitHub repository settings for publishing to work.
+> [!NOTE]
+> You must add your NPM token as a secret named `NPM_TOKEN` in your GitHub repository settings for publishing to work.
