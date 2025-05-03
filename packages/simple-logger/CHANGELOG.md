@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.4](https://github.com/proj-coursebook/simple-logger/compare/v0.1.3...v0.1.4) (2025-05-03)
+
+
+### Features
+
+* enhance logger type definition in example ([20101e2](https://github.com/proj-coursebook/simple-logger/commit/20101e2900f4eadc04625cd7953ef7ab43d75638))
+
 ### [0.1.3](https://github.com/proj-coursebook/simple-logger/compare/v0.1.2...v0.1.3) (2025-05-03)
 
 
