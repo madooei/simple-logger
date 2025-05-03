@@ -1,0 +1,21 @@
+{
+  "name": "simple-logger-demo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Minimal example usage of @madooei/simple-logger.",
+  "main": "index.ts",
+  "scripts": {
+    "start": "tsx --no-warnings ./index.ts",
+    "build": "tsc",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@madooei/simple-logger": "file:../../packages/simple-logger"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "tsx": "^4.19.4",
+    "typescript": "^5.0.0"
+  }
+} 
