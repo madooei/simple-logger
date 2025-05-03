@@ -16,13 +16,13 @@ A lightweight, flexible logging system for ContentSmith that supports namespace-
 ### Basic Usage
 
 ```typescript
-import { LogManagerImpl } from '@coursebook/simple-logger';
+import { LogManagerImpl, Logger } from '@coursebook/simple-logger';
 
 // Get the logger instance
 const logManager = LogManagerImpl.getInstance();
 
 // Create a logger for your component
-const logger = logManager.getLogger('myapp:component');
+const logger: Logger = logManager.getLogger('myapp:component');
 
 // Log at different levels
 logger.trace('Detailed debugging');
