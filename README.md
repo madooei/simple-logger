@@ -3,7 +3,7 @@
 This repository contains `@coursebook/simple-logger`, a lightweight, flexible logging system for CourseBook that supports namespace-based logging with different log levels.
 
 > [!TIP]
-> For package-specific instructions (installation, usage, development, publishing, etc.), see the README in `packages/simple-logger/`.
+> For package-specific instructions (installation, usage, development, publishing, etc.), see the [README in `packages/simple-logger/`](packages/simple-logger/README.md).
 
 ## Repository Structure
 
