@@ -16,7 +16,7 @@ A lightweight, flexible logging system for ContentSmith that supports namespace-
 ### Basic Usage
 
 ```typescript
-import { LogManagerImpl, Logger } from '@coursebook/simple-logger';
+import { LogManagerImpl, type Logger } from '@coursebook/simple-logger';
 
 // Get the logger instance
 const logManager = LogManagerImpl.getInstance();
@@ -160,7 +160,7 @@ There are three ways to use this package locally:
 3. Import the package in your project:
 
    ```typescript
-   import { LogManagerImpl } from '@coursebook/simple-logger';
+   import { LogManagerImpl, type Logger } from '@coursebook/simple-logger';
    ```
 
 #### Option 2: Using local path
