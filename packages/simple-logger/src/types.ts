@@ -23,6 +23,12 @@ export class LogManagerError extends Error {
 export type LogLevel = "trace" | "info" | "warn" | "error";
 export type NamespacePattern = string | RegExp;
 
+/**
+ * Logger interface for logging messages
+ * with different log levels.
+ * Each method accepts any number of arguments
+ * and logs them at the corresponding log level.
+ */
 export interface Logger {
   trace(...args: any[]): void;
   info(...args: any[]): void;
@@ -30,6 +36,12 @@ export interface Logger {
   error(...args: any[]): void;
 }
 
+/**
+ * LogManager interface for managing loggers
+ * and their log levels.
+ * It provides methods to get a logger for a specific namespace,
+ * set log levels for namespaces, and enable/disable logging.
+ */
 export interface LogManager {
   getLogger(namespace: string): Logger;
   setLogLevel(namespacePattern: NamespacePattern, level: LogLevel): void;
