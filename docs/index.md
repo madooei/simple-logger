@@ -38,7 +38,7 @@ logger.error('Error occurred', { details: 'error info' });
 logManager.setLogLevel('myapp:component', 'info');
 
 // Set level for all components in 'myapp'
-logManager.setLogLevel('myapp:', 'warn');
+logManager.setLogLevel('myapp:*', 'warn');
 
 // Use regex pattern
 logManager.setLogLevel(/test:\d+/, 'trace');
