@@ -36,7 +36,7 @@ describe("LogManager", () => {
       logger.info("test message");
       expect(consoleMock.log).toHaveBeenCalledWith(
         "[INFO] [test]",
-        "test message"
+        "test message",
       );
     });
 
@@ -79,11 +79,11 @@ describe("LogManager", () => {
 
       expect(consoleMock.log).toHaveBeenCalledWith(
         "[TRACE] [app:component1]",
-        "trace1"
+        "trace1",
       );
       expect(consoleMock.log).not.toHaveBeenCalledWith(
         "[TRACE] [app:component2]",
-        "trace2"
+        "trace2",
       );
     });
 
@@ -99,7 +99,7 @@ describe("LogManager", () => {
 
       expect(consoleMock.log).not.toHaveBeenCalledWith(
         "[TRACE] [app:test]",
-        "trace"
+        "trace",
       );
       expect(consoleMock.log).toHaveBeenCalledWith("[INFO] [app:test]", "info");
     });
@@ -116,7 +116,7 @@ describe("LogManager", () => {
 
       expect(consoleMock.log).not.toHaveBeenCalledWith(
         "[TRACE] [test:123]",
-        "trace"
+        "trace",
       );
       expect(consoleMock.log).toHaveBeenCalledWith("[INFO] [test:123]", "info");
     });
@@ -143,7 +143,7 @@ describe("LogManager", () => {
 
       expect(consoleMock.log).not.toHaveBeenCalledWith(
         "[INFO] [test]",
-        "test1"
+        "test1",
       );
       expect(consoleMock.log).toHaveBeenCalledWith("[INFO] [test]", "test2");
     });
@@ -159,7 +159,7 @@ describe("LogManager", () => {
       expect(consoleMock.log).toHaveBeenCalledWith(
         "[INFO] [test]",
         "test",
-        JSON.stringify(testObj, null, 2)
+        JSON.stringify(testObj, null, 2),
       );
     });
   });
