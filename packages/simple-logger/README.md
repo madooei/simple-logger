@@ -123,3 +123,41 @@ This repository is set up to publish the package to NPM automatically using GitH
 
 > [!NOTE]
 > You must add your NPM token as a secret named `NPM_TOKEN` in your GitHub repository settings for publishing to work.
+
+## TODO List (Priority Order)
+
+### High Priority (Core Issues)
+
+1. **Fix argument processing performance** - Move `JSON.stringify` inside the log output check to avoid processing when logs are filtered out
+
+2. **Fix pattern matching precedence logic** - Make RegExp patterns take higher priority than wildcard patterns, clarify length-based matching rules
+
+3. **Add proper error handling** - Use defined `LogManagerError` types, validate log levels, handle edge cases in pattern matching
+
+4. **Add environment variable support** - Read log levels from `LOG_LEVEL` or similar env vars with code-level overrides
+
+5. **Implement logger cleanup mechanism** - Prevent memory leaks from cached logger instances in long-running apps
+
+### Medium Priority (Functionality)
+
+6. **Add lazy evaluation for expensive log operations** - Support function arguments that are only evaluated when logging
+
+7. **Improve pattern matching edge cases** - Handle overlapping patterns more predictably, add tests for complex scenarios
+
+8. **Add structured metadata support** - Allow attaching key-value pairs to log entries (requestId, userId, etc.)
+
+9. **Add basic configuration validation** - Ensure namespace patterns and log levels are valid
+
+### Low Priority (Nice-to-Have)
+
+10. **Add console color output** - Color-code log levels (red for error, yellow for warn, etc.)
+
+11. **Add pluggable output destinations** - Support file writing, external services beyond console
+
+12. **Add custom log formatting** - Allow timestamp, custom prefixes, JSON output format
+
+13. **Add log filtering beyond level** - Content-based filters, rate limiting
+
+14. **Add async logging support** - Non-blocking log operations for high-throughput scenarios
+
+15. **Add log rotation/management** - File size limits, cleanup policies
