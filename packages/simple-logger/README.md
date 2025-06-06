@@ -126,6 +126,14 @@ This repository is set up to publish the package to NPM automatically using GitH
 
 ## TODO List (Priority Order)
 
+### Highest Priority (Philosophy)
+
+We need to have only two log levels: `trace` and `info`. 
+
+The `info` level, which is the default, should be used for general logging. This is where you put `console.log` statements that you want to see in production. You print information that is useful (e.g., server started, etc.), warnings, and errors.
+
+The `trace` level should be used for debugging purposes. This is where you put `DEBUG && console.log()` statements that you only want to see when debugging. The problem this library solves is that you can scope the logging to a specific namespace, so you can turn on debugging for a specific part of your code without cluttering the console with logs from other parts.
+
 ### High Priority (Core Issues)
 
 1. **Fix argument processing performance** - Move `JSON.stringify` inside the log output check to avoid processing when logs are filtered out
