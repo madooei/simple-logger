@@ -121,6 +121,43 @@ describe("LogManager", () => {
       expect(consoleMock.log).toHaveBeenCalledWith("[INFO] [test:123]", "info");
     });
 
+    it("regex patterns should override wildcard and prefix patterns", () => {
+      const logger = logManager.getLogger("app:component1");
+
+      // Clear default pattern and set specific levels
+      logManager.setLogLevel("*", "error");
+      logManager.setLogLevel("app:*", "warn");
+      logManager.setLogLevel(/app:component\d+/, "trace");
+
+      logger.trace("trace");
+
+      expect(consoleMock.log).toHaveBeenCalledWith(
+        "[TRACE] [app:component1]",
+        "trace",
+      );
+    });
+
+    it("exact patterns should override regex patterns", () => {
+      const logger = logManager.getLogger("app:component1");
+
+      // Clear default pattern and set specific levels
+      logManager.setLogLevel("*", "error");
+      logManager.setLogLevel(/app:component\d+/, "trace");
+      logManager.setLogLevel("app:component1", "info");
+
+      logger.trace("trace");
+      logger.info("info");
+
+      expect(consoleMock.log).not.toHaveBeenCalledWith(
+        "[TRACE] [app:component1]",
+        "trace",
+      );
+      expect(consoleMock.log).toHaveBeenCalledWith(
+        "[INFO] [app:component1]",
+        "info",
+      );
+    });
+
     it("should prioritize regex level over wildcard", () => {
       const logger = logManager.getLogger("test:42");
 
