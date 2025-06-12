@@ -84,31 +84,43 @@ export class LogManagerImpl implements LogManager {
 
   private shouldLog(namespace: string, level: LogLevel): boolean {
     if (!this.enabled) return false;
-
     let matchedLevel: LogLevel | null = null;
-    let matchedPatternLength = -1; // Track the length of the matched pattern
+    let bestPriority = -1;
+    let bestLength = -1;
+
+    const getPriority = (pattern: NamespacePattern): number => {
+      if (typeof pattern === "string") {
+        if (pattern === "*") return 0; // wildcard
+        if (pattern.endsWith("*")) return 1; // prefix
+        return 3; // exact
+      }
+      return 2; // regex
+    };
+
+    const getLength = (pattern: NamespacePattern): number => {
+      if (typeof pattern === "string") {
+        if (pattern === "*") return 0;
+        if (pattern.endsWith("*")) return pattern.length - 1;
+        return pattern.length;
+      }
+      return pattern.source.length;
+    };
 
     for (const [pattern, logLevel] of this.logLevels) {
-      if (typeof pattern === "string") {
-        if (this.matchesStringPattern(namespace, pattern)) {
-          // For wildcard patterns, use the length without the *
-          const effectiveLength =
-            pattern === "*"
-              ? 0
-              : pattern.endsWith("*")
-                ? pattern.length - 1
-                : pattern.length;
-          if (effectiveLength > matchedPatternLength) {
-            matchedLevel = logLevel;
-            matchedPatternLength = effectiveLength;
-          }
-        }
-      } else if (pattern instanceof RegExp && pattern.test(namespace)) {
-        // RegExp patterns take precedence over wildcard but not over exact matches
-        if (matchedPatternLength <= 0) {
-          matchedLevel = logLevel;
-          matchedPatternLength = 1;
-        }
+      const isMatch =
+        typeof pattern === "string"
+          ? this.matchesStringPattern(namespace, pattern)
+          : pattern.test(namespace);
+
+      if (!isMatch) continue;
+
+      const priority = getPriority(pattern);
+      const length = getLength(pattern);
+
+      if (priority > bestPriority || (priority === bestPriority && length > bestLength)) {
+        matchedLevel = logLevel;
+        bestPriority = priority;
+        bestLength = length;
       }
     }
 
