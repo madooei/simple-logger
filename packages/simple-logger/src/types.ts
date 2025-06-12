@@ -20,7 +20,7 @@ export class LogManagerError extends Error {
   }
 }
 
-export type LogLevel = "trace" | "info" | "warn" | "error";
+export type LogLevel = "trace" | "info";
 export type NamespacePattern = string | RegExp;
 
 /**
@@ -32,8 +32,6 @@ export type NamespacePattern = string | RegExp;
 export interface Logger {
   trace(...args: any[]): void;
   info(...args: any[]): void;
-  warn(...args: any[]): void;
-  error(...args: any[]): void;
 }
 
 /**

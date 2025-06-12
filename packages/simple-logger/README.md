@@ -9,7 +9,7 @@ A lightweight, flexible logging system for CourseBook that supports namespace-ba
 
 - **Namespace-based Logging**: Organize logs by component and operation
 - **Pattern Matching**: Control log levels using string prefixes or regex patterns
-- **Log Level Hierarchy**: trace → info → warn → error
+- **Log Level Hierarchy**: trace → info
 - **Object Serialization**: Automatically pretty-print objects
 - **Global Enable/Disable**: Quickly toggle all logging
 - **Singleton Pattern**: Centralized logging control
@@ -39,9 +39,7 @@ A lightweight, flexible logging system for CourseBook that supports namespace-ba
 2. **Log Level Usage**:
 
    - `trace`: Detailed debugging information
-   - `info`: Normal operation progress
-   - `warn`: Recoverable issues
-   - `error`: Operation failures
+   - `info`: General logging, warnings, and errors
 
 3. **Pattern Usage**:
    - Use specific patterns for fine-grained control
@@ -158,7 +156,7 @@ The `trace` level should be used for debugging purposes. This is where you put `
 
 ### Low Priority (Nice-to-Have)
 
-10. **Add console color output** - Color-code log levels (red for error, yellow for warn, etc.)
+10. **Add console color output** - Color-code log levels
 
 11. **Add pluggable output destinations** - Support file writing, external services beyond console
 
@@ -169,3 +167,17 @@ The `trace` level should be used for debugging purposes. This is where you put `
 14. **Add async logging support** - Non-blocking log operations for high-throughput scenarios
 
 15. **Add log rotation/management** - File size limits, cleanup policies
+
+## Extending Log Levels
+
+If you need more granular logging, fork this repository and adjust the source
+code:
+
+1. **Add your levels** in `src/types.ts` by extending the `LogLevel` union in the
+   order of lowest to highest priority.
+2. **Update `shouldLog`** in `src/index.ts` so the `levels` array reflects your
+   new hierarchy.
+3. **Create logger methods** for each level in `Logger` and `LoggerImpl`.
+4. Update tests and docs to describe the additional levels.
+
+With these changes you can introduce higher or lower priority levels as needed.
