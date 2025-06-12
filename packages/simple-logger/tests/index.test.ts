@@ -162,5 +162,17 @@ describe("LogManager", () => {
         JSON.stringify(testObj, null, 2),
       );
     });
+
+    it("should log null without quotes", () => {
+      const logger = logManager.getLogger("test");
+
+      logger.info("value", null);
+
+      expect(consoleMock.log).toHaveBeenCalledWith(
+        "[INFO] [test]",
+        "value",
+        null,
+      );
+    });
   });
 });
