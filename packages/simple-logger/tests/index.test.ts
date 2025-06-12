@@ -157,6 +157,17 @@ describe("LogManager", () => {
         "info",
       );
     });
+
+    it("should prioritize regex level over wildcard", () => {
+      const logger = logManager.getLogger("test:42");
+
+      logManager.setLogLevel(/test:\d+/, "info");
+      logManager.setLogLevel("*", "error");
+
+      logger.info("info");
+
+      expect(consoleMock.log).toHaveBeenCalledWith("[INFO] [test:42]", "info");
+    });
   });
 
   describe("Enable/Disable", () => {
@@ -197,6 +208,18 @@ describe("LogManager", () => {
         "[INFO] [test]",
         "test",
         JSON.stringify(testObj, null, 2),
+      );
+    });
+
+    it("should log null without quotes", () => {
+      const logger = logManager.getLogger("test");
+
+      logger.info("value", null);
+
+      expect(consoleMock.log).toHaveBeenCalledWith(
+        "[INFO] [test]",
+        "value",
+        null,
       );
     });
   });
