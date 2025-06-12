@@ -20,14 +20,6 @@ class LoggerImpl implements Logger {
   info(...args: any[]): void {
     this.manager.log(this.namespace, "info", ...args);
   }
-
-  warn(...args: any[]): void {
-    this.manager.log(this.namespace, "warn", ...args);
-  }
-
-  error(...args: any[]): void {
-    this.manager.log(this.namespace, "error", ...args);
-  }
 }
 
 export class LogManagerImpl implements LogManager {
@@ -131,21 +123,14 @@ export class LogManagerImpl implements LogManager {
     messageLevel: LogLevel,
     configuredLevel: LogLevel,
   ): boolean {
-    const levels: LogLevel[] = ["trace", "info", "warn", "error"];
+    const levels: LogLevel[] = ["trace", "info"];
     return levels.indexOf(messageLevel) >= levels.indexOf(configuredLevel);
   }
 
   log(namespace: string, level: LogLevel, ...args: any[]): void {
     if (this.shouldLog(namespace, level)) {
-      const logMethod =
-        level === "warn"
-          ? console.warn
-          : level === "error"
-            ? console.error
-            : console.log;
-
       const prefix = `[${level.toUpperCase()}] [${namespace}]`;
-      logMethod(
+      console.log(
         prefix,
         ...args.map((arg) =>
           typeof arg === "object" && arg !== null ? JSON.stringify(arg, null, 2) : arg,

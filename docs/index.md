@@ -6,7 +6,7 @@ A lightweight, flexible logging system for CourseBook that supports namespace-ba
 
 - **Namespace-based Logging**: Organize logs by component and operation
 - **Pattern Matching**: Control log levels using string prefixes or regex patterns
-- **Log Level Hierarchy**: trace → info → warn → error
+- **Log Level Hierarchy**: trace → info
 - **Object Serialization**: Automatically pretty-print objects
 - **Global Enable/Disable**: Quickly toggle all logging
 - **Singleton Pattern**: Centralized logging control
@@ -27,8 +27,6 @@ const logger: Logger = logManager.getLogger('myapp:component');
 // Log at different levels
 logger.trace('Detailed debugging');
 logger.info('General information');
-logger.warn('Warning message');
-logger.error('Error occurred', { details: 'error info' });
 ```
 
 ### Setting Log Levels
@@ -38,7 +36,7 @@ logger.error('Error occurred', { details: 'error info' });
 logManager.setLogLevel('myapp:component', 'info');
 
 // Set level for all components in 'myapp'
-logManager.setLogLevel('myapp:*', 'warn');
+logManager.setLogLevel('myapp:*', 'info');
 
 // Use regex pattern
 logManager.setLogLevel(/test:\d+/, 'trace');
@@ -57,16 +55,21 @@ logManager.setLogLevel('*', 'info');
 ### Log Levels
 
 1. `trace` - Verbose debugging information
-2. `info` - General information about operation progress
-3. `warn` - Warning messages for potentially problematic situations
-4. `error` - Error messages for operation failures
+2. `info` - Informational messages and errors
 
 When you set a log level, all levels of equal or higher severity will be logged:
 
-- Setting level to 'trace' shows all logs
-- Setting level to 'info' shows info, warn, and error
-- Setting level to 'warn' shows only warn and error
-- Setting level to 'error' shows only error
+- Setting level to 'trace' shows trace and info logs
+- Setting level to 'info' shows only info logs
+
+### Why Only Two Log Levels?
+
+`info` is the default level for regular logging. It covers everything you would
+normally output with `console.log`, including warnings and errors that should be
+visible in production. `trace` is solely for debugging and is typically enabled
+only for a specific namespace during development. Restricting the hierarchy to
+these two levels keeps configuration simple while still letting you turn on
+detailed logs without flooding the console.
 
 ### Enable/Disable Logging
 
@@ -112,7 +115,7 @@ export class FileManager {
       this.logger.info('Successfully read file:', path);
       return content;
     } catch (error) {
-      this.logger.error('Failed to read file:', path, error);
+      this.logger.info('Failed to read file:', path, error);
       throw error;
     }
   }

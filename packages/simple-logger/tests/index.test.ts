@@ -3,7 +3,7 @@ import { LogManagerImpl } from "@/index";
 
 describe("LogManager", () => {
   let logManager: LogManagerImpl;
-  let consoleMock: { log: any; warn: any; error: any };
+  let consoleMock: { log: any };
 
   beforeEach(() => {
     // Reset singleton
@@ -13,8 +13,6 @@ describe("LogManager", () => {
     // Mock console methods
     consoleMock = {
       log: vi.spyOn(console, "log").mockImplementation(() => {}),
-      warn: vi.spyOn(console, "warn").mockImplementation(() => {}),
-      error: vi.spyOn(console, "error").mockImplementation(() => {}),
     };
   });
 
@@ -51,28 +49,26 @@ describe("LogManager", () => {
     it("should respect log level hierarchy", () => {
       const logger = logManager.getLogger("test");
 
-      // Override the default '*' pattern with a more restrictive level
-      logManager.setLogLevel("*", "error");
-      logManager.setLogLevel("test", "warn");
+      logManager.setLogLevel("*", "info");
+      logManager.setLogLevel("test", "info");
 
       logger.trace("trace");
       logger.info("info");
-      logger.warn("warn");
-      logger.error("error");
 
-      expect(consoleMock.log).not.toHaveBeenCalled(); // trace and info
-      expect(consoleMock.warn).toHaveBeenCalledWith("[WARN] [test]", "warn");
-      expect(consoleMock.error).toHaveBeenCalledWith("[ERROR] [test]", "error");
+      expect(consoleMock.log).toHaveBeenCalledWith("[INFO] [test]", "info");
+      expect(consoleMock.log).not.toHaveBeenCalledWith(
+        "[TRACE] [test]",
+        "trace",
+      );
     });
 
     it("should handle different log levels for different namespaces", () => {
       const logger1 = logManager.getLogger("app:component1");
       const logger2 = logManager.getLogger("app:component2");
 
-      // Clear default pattern and set specific levels
-      logManager.setLogLevel("*", "error");
+      logManager.setLogLevel("*", "info");
       logManager.setLogLevel("app:component1", "trace");
-      logManager.setLogLevel("app:component2", "error");
+      logManager.setLogLevel("app:component2", "info");
 
       logger1.trace("trace1");
       logger2.trace("trace2");
@@ -90,14 +86,13 @@ describe("LogManager", () => {
     it("should support wildcard patterns", () => {
       const logger = logManager.getLogger("app:test");
 
-      // Clear default pattern and set specific level
-      logManager.setLogLevel("*", "error");
-      logManager.setLogLevel("app:*", "info");
+      logManager.setLogLevel("*", "info");
+      logManager.setLogLevel("app:*", "trace");
 
       logger.trace("trace");
       logger.info("info");
 
-      expect(consoleMock.log).not.toHaveBeenCalledWith(
+      expect(consoleMock.log).toHaveBeenCalledWith(
         "[TRACE] [app:test]",
         "trace",
       );
@@ -107,14 +102,13 @@ describe("LogManager", () => {
     it("should support regex patterns", () => {
       const logger = logManager.getLogger("test:123");
 
-      // Clear default pattern and set specific level
-      logManager.setLogLevel("*", "error");
-      logManager.setLogLevel(/test:\d+/, "info");
+      logManager.setLogLevel("*", "info");
+      logManager.setLogLevel(/test:\d+/, "trace");
 
       logger.trace("trace");
       logger.info("info");
 
-      expect(consoleMock.log).not.toHaveBeenCalledWith(
+      expect(consoleMock.log).toHaveBeenCalledWith(
         "[TRACE] [test:123]",
         "trace",
       );
@@ -124,9 +118,8 @@ describe("LogManager", () => {
     it("regex patterns should override wildcard and prefix patterns", () => {
       const logger = logManager.getLogger("app:component1");
 
-      // Clear default pattern and set specific levels
-      logManager.setLogLevel("*", "error");
-      logManager.setLogLevel("app:*", "warn");
+      logManager.setLogLevel("*", "info");
+      logManager.setLogLevel("app:*", "info");
       logManager.setLogLevel(/app:component\d+/, "trace");
 
       logger.trace("trace");
@@ -140,8 +133,7 @@ describe("LogManager", () => {
     it("exact patterns should override regex patterns", () => {
       const logger = logManager.getLogger("app:component1");
 
-      // Clear default pattern and set specific levels
-      logManager.setLogLevel("*", "error");
+      logManager.setLogLevel("*", "info");
       logManager.setLogLevel(/app:component\d+/, "trace");
       logManager.setLogLevel("app:component1", "info");
 
@@ -161,12 +153,12 @@ describe("LogManager", () => {
     it("should prioritize regex level over wildcard", () => {
       const logger = logManager.getLogger("test:42");
 
-      logManager.setLogLevel(/test:\d+/, "info");
-      logManager.setLogLevel("*", "error");
+      logManager.setLogLevel(/test:\d+/, "trace");
+      logManager.setLogLevel("*", "info");
 
-      logger.info("info");
+      logger.trace("trace");
 
-      expect(consoleMock.log).toHaveBeenCalledWith("[INFO] [test:42]", "info");
+      expect(consoleMock.log).toHaveBeenCalledWith("[TRACE] [test:42]", "trace");
     });
   });
 
