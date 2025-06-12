@@ -120,6 +120,17 @@ describe("LogManager", () => {
       );
       expect(consoleMock.log).toHaveBeenCalledWith("[INFO] [test:123]", "info");
     });
+
+    it("should prioritize regex level over wildcard", () => {
+      const logger = logManager.getLogger("test:42");
+
+      logManager.setLogLevel(/test:\d+/, "info");
+      logManager.setLogLevel("*", "error");
+
+      logger.info("info");
+
+      expect(consoleMock.log).toHaveBeenCalledWith("[INFO] [test:42]", "info");
+    });
   });
 
   describe("Enable/Disable", () => {
