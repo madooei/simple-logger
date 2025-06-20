@@ -16,7 +16,7 @@ A lightweight, flexible logging system for CourseBook that supports namespace-ba
 ### Basic Usage
 
 ```typescript
-import { LogManagerImpl, type Logger } from '@coursebook/simple-logger';
+import { LogManagerImpl, type Logger } from '@madooei/simple-logger';
 
 // Get the logger instance
 const logManager = LogManagerImpl.getInstance();
@@ -129,7 +129,7 @@ export class FileManager {
 Once published to NPM, the package can be installed using:
 
 ```bash
-npm install @coursebook/simple-logger
+npm install @madooei/simple-logger
 ```
 
 This template is particularly useful for creating packages that are intended to be used locally so read the instructions below for local development.
@@ -157,13 +157,13 @@ There are three ways to use this package locally:
 2. In your other project where you want to use this package:
 
    ```bash
-   npm link @coursebook/simple-logger
+   npm link @madooei/simple-logger
    ```
 
 3. Import the package in your project:
 
    ```typescript
-   import { LogManagerImpl, type Logger } from '@coursebook/simple-logger';
+   import { LogManagerImpl, type Logger } from '@madooei/simple-logger';
    ```
 
 #### Option 2: Using local path
@@ -173,7 +173,7 @@ In your other project's `package.json`, add this package as a dependency using t
 ```json
 {
   "dependencies": {
-    "@coursebook/simple-logger": "file:/path/to/simple-logger"
+    "@madooei/simple-logger": "file:/path/to/simple-logger"
   }
 }
 ```
@@ -212,7 +212,7 @@ This method installs the package exactly as it would be published to npm, making
 ```json
 {
   "dependencies": {
-    "@coursebook/simple-logger": "file:coursebook-simple-logger-1.0.0.tgz"
+    "@madooei/simple-logger": "file:coursebook-simple-logger-1.0.0.tgz"
   }
 }
 ```

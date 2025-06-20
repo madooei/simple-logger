@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Minimal example usage of @coursebook/simple-logger.",
+  "description": "Minimal example usage of @madooei/simple-logger.",
   "main": "index.ts",
   "scripts": {
     "start": "tsx --no-warnings ./src/index.ts",
@@ -11,7 +11,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@coursebook/simple-logger": "file:../../packages/simple-logger"
+    "@madooei/simple-logger": "file:../../packages/simple-logger"
   },
   "devDependencies": {
     "@types/node": "^22.15.3",

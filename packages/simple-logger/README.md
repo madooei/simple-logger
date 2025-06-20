@@ -3,7 +3,7 @@
 A lightweight, flexible logging system for CourseBook that supports namespace-based logging with different log levels.
 
 > [!TIP]
-> Refer to this package's docs ([source](../../docs/index.md) or [website](https://proj-coursebook.github.io/simple-logger/)) for how to use it.
+> Refer to this package's docs ([source](../../docs/index.md) or [website](https://madooei.github.io/simple-logger/)) for how to use it.
 
 ## Features
 

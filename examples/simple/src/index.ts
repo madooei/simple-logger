@@ -1,4 +1,4 @@
-import { LogManagerImpl, type Logger } from '@coursebook/simple-logger';
+import { LogManagerImpl, type Logger } from '@madooei/simple-logger';
 
 // Get the logger instance
 const logManager = LogManagerImpl.getInstance();
