@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.7](https://github.com/madooei/simple-logger/compare/v0.1.6...v0.1.7) (2025-06-20)
+
+
+### Bug Fixes
+
+* update package.json to include additional files in the package ([bac9ee4](https://github.com/madooei/simple-logger/commit/bac9ee46a8fdf4203fd491b2de356b09443e0983))
+
 ### [0.1.6](https://github.com/madooei/simple-logger/compare/v0.1.5...v0.1.6) (2025-06-20)
 
 ### [0.1.5](https://github.com/madooei/simple-logger/compare/v0.1.4...v0.1.5) (2025-06-20)
