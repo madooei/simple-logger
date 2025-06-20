@@ -1,6 +1,6 @@
 # Simple Logger
 
-This repository contains `@madooei/simple-logger`, a lightweight, flexible logging system for CourseBook that supports namespace-based logging with different log levels.
+This repository contains `@madooei/simple-logger`, a lightweight and minimal logging system for TypeScript projects that supports namespace-based logging with two log levels.
 
 > [!TIP]
 > For package-specific instructions (installation, usage, development, publishing, etc.), see the [README in `packages/simple-logger/`](packages/simple-logger/README.md).

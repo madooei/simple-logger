@@ -50,7 +50,10 @@
     "README.md",
     "CHANGELOG.md"
   ],
-  "keywords": [],
+  "keywords": [
+    "logger",
+    "typescript"
+  ],
   "author": "Ali Madooei",
   "license": "MIT",
   "devDependencies": {
