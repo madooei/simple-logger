@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.5](https://github.com/madooei/simple-logger/compare/v0.1.4...v0.1.5) (2025-06-20)
+
+
+### Features
+
+* add example implementation for Logger usage and update TypeScript configuration ([2918eed](https://github.com/madooei/simple-logger/commit/2918eed11c9986a27ad85f51302d313ae1d89d94))
+* add initial workspace configuration for simple-logger project ([2ad118a](https://github.com/madooei/simple-logger/commit/2ad118a3292c5ebac254d3363d4d50f6ad4c10fb))
+* add logging philosophy and priority levels to TODO list in README ([6f648bb](https://github.com/madooei/simple-logger/commit/6f648bb8c23b931adac95338cdae460db532e490))
+* add TODO list with prioritized tasks for future improvements ([cbf9255](https://github.com/madooei/simple-logger/commit/cbf9255b3868c7cf5d3839a28ed2d978f58e4197))
+* initialize empty TypeScript playground with basic setup and configuration files ([95de755](https://github.com/madooei/simple-logger/commit/95de7551b5d67c47e687e2ea8cd44b3e2caad631))
+* update Logger import to include type definition in usage examples ([54106b1](https://github.com/madooei/simple-logger/commit/54106b1d3c70b2c8bb4f01ff3d2b61a59032960a))
+
+
+### Bug Fixes
+
+* handle null values correctly in log output ([01eddce](https://github.com/madooei/simple-logger/commit/01eddcea6b690bcba437486cd48bed033d128d4e))
+* update launch configuration name and clean up comments in launch.json ([c2c9cff](https://github.com/madooei/simple-logger/commit/c2c9cff2f40287c32977d504839f8763a3c652cc))
+* update start script path to reference src/index.ts ([edca1f6](https://github.com/madooei/simple-logger/commit/edca1f64a5384723adeef1690e673de702cfa975))
+
 ### [0.1.4](https://github.com/proj-coursebook/simple-logger/compare/v0.1.3...v0.1.4) (2025-05-03)
 
 ### Features
