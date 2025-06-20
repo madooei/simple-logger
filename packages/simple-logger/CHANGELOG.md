@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.8](https://github.com/madooei/simple-logger/compare/v0.1.7...v0.1.8) (2025-06-20)
+
+
+### Features
+
+* implement GitHub Actions workflow for package publishing and release creation ([44f8076](https://github.com/madooei/simple-logger/commit/44f807609e307aa42a430edf678693163e559ace))
+
 ### [0.1.7](https://github.com/madooei/simple-logger/compare/v0.1.6...v0.1.7) (2025-06-20)
 
 
