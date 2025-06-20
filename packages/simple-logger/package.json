@@ -45,6 +45,11 @@
     "clean:all": "rm -rf dist coverage node_modules",
     "release": "standard-version"
   },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
   "keywords": [],
   "author": "Ali Madooei",
   "license": "MIT",
