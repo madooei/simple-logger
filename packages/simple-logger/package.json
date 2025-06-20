@@ -40,7 +40,7 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
-    "validate": "npm run type-check && npm run lint && npm run format && npm run test",
+    "validate": "npm run type-check && npm run lint:fix && npm run format:fix && npm run test",
     "clean": "rm -rf dist coverage",
     "clean:all": "rm -rf dist coverage node_modules",
     "release": "standard-version"

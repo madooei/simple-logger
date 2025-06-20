@@ -126,7 +126,7 @@ This repository is set up to publish the package to NPM automatically using GitH
 
 ### Highest Priority (Philosophy)
 
-We need to have only two log levels: `trace` and `info`. 
+We need to have only two log levels: `trace` and `info`.
 
 The `info` level, which is the default, should be used for general logging. This is where you put `console.log` statements that you want to see in production. You print information that is useful (e.g., server started, etc.), warnings, and errors.
 

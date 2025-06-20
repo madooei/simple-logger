@@ -109,7 +109,10 @@ export class LogManagerImpl implements LogManager {
       const priority = getPriority(pattern);
       const length = getLength(pattern);
 
-      if (priority > bestPriority || (priority === bestPriority && length > bestLength)) {
+      if (
+        priority > bestPriority ||
+        (priority === bestPriority && length > bestLength)
+      ) {
         matchedLevel = logLevel;
         bestPriority = priority;
         bestLength = length;
@@ -133,7 +136,9 @@ export class LogManagerImpl implements LogManager {
       console.log(
         prefix,
         ...args.map((arg) =>
-          typeof arg === "object" && arg !== null ? JSON.stringify(arg, null, 2) : arg,
+          typeof arg === "object" && arg !== null
+            ? JSON.stringify(arg, null, 2)
+            : arg,
         ),
       );
     }

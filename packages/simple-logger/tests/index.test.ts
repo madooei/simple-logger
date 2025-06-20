@@ -158,7 +158,10 @@ describe("LogManager", () => {
 
       logger.trace("trace");
 
-      expect(consoleMock.log).toHaveBeenCalledWith("[TRACE] [test:42]", "trace");
+      expect(consoleMock.log).toHaveBeenCalledWith(
+        "[TRACE] [test:42]",
+        "trace",
+      );
     });
   });
 
