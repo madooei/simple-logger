@@ -2,47 +2,57 @@
 
 A lightweight, flexible logging system for CourseBook that supports namespace-based logging with different log levels.
 
-## Features
+**Features:**
 
-- **Namespace-based Logging**: Organize logs by component and operation
-- **Pattern Matching**: Control log levels using string prefixes or regex patterns
-- **Log Level Hierarchy**: trace → info
-- **Object Serialization**: Automatically pretty-print objects
-- **Global Enable/Disable**: Quickly toggle all logging
-- **Singleton Pattern**: Centralized logging control
+- Written in TypeScript
+- Builds to both modern ES modules and CommonJS formats
+- Provides TypeScript type definitions
+- ESLint for code linting
+- Prettier for code formatting
+- Vitest for testing
+- Tsup for building
+- Minimal dependencies
+
+## Installation
+
+```bash
+npm install @madooei/simple-logger
+```
 
 ## Usage
+
+A lightweight, flexible logging system for CourseBook that supports namespace-based logging with different log levels.
 
 ### Basic Usage
 
 ```typescript
-import { LogManagerImpl, type Logger } from '@madooei/simple-logger';
+import { LogManagerImpl, type Logger } from "@madooei/simple-logger";
 
 // Get the logger instance
 const logManager = LogManagerImpl.getInstance();
 
 // Create a logger for your component
-const logger: Logger = logManager.getLogger('myapp:component');
+const logger: Logger = logManager.getLogger("myapp:component");
 
 // Log at different levels
-logger.trace('Detailed debugging');
-logger.info('General information');
+logger.trace("Detailed debugging");
+logger.info("General information");
 ```
 
 ### Setting Log Levels
 
 ```typescript
 // Set level for specific namespace
-logManager.setLogLevel('myapp:component', 'info');
+logManager.setLogLevel("myapp:component", "info");
 
 // Set level for all components in 'myapp'
-logManager.setLogLevel('myapp:*', 'info');
+logManager.setLogLevel("myapp:*", "info");
 
 // Use regex pattern
-logManager.setLogLevel(/test:\d+/, 'trace');
+logManager.setLogLevel(/test:\d+/, "trace");
 
 // Set default level for everything
-logManager.setLogLevel('*', 'info');
+logManager.setLogLevel("*", "info");
 ```
 
 ### Namespace Patterns
@@ -86,9 +96,9 @@ logManager.enable();
 Objects are automatically pretty-printed:
 
 ```typescript
-logger.info('Processing config', {
-  server: 'localhost',
-  port: 3000
+logger.info("Processing config", {
+  server: "localhost",
+  port: 3000,
 });
 
 // Output:
@@ -103,116 +113,121 @@ logger.info('Processing config', {
 ```typescript
 export class FileManager {
   private logger: Logger;
-  
+
   constructor() {
-    this.logger = LogManagerImpl.getInstance().getLogger('filemanager');
+    this.logger = LogManagerImpl.getInstance().getLogger("filemanager");
   }
-  
+
   async readFile(path: string): Promise<Buffer> {
-    this.logger.trace('Reading file:', path);
+    this.logger.trace("Reading file:", path);
     try {
       const content = await readFile(path);
-      this.logger.info('Successfully read file:', path);
+      this.logger.info("Successfully read file:", path);
       return content;
     } catch (error) {
-      this.logger.info('Failed to read file:', path, error);
+      this.logger.info("Failed to read file:", path, error);
       throw error;
     }
   }
 }
 ```
 
-## Installation
+## Features
 
-### Installing from NPM (After Publishing)
+- **Namespace-based Logging**: Organize logs by component and operation
+- **Pattern Matching**: Control log levels using string prefixes or regex patterns
+- **Log Level Hierarchy**: trace → info
+- **Object Serialization**: Automatically pretty-print objects
+- **Global Enable/Disable**: Quickly toggle all logging
+- **Singleton Pattern**: Centralized logging control
 
-Once published to NPM, the package can be installed using:
+## Cloning the Repository
+
+To make your workflow more organized, it's a good idea to clone this repository into a directory named `simple-logging-workspace`. This helps differentiate the workspace from the `simple-logger` located in the `packages` directory.
 
 ```bash
-npm install @madooei/simple-logger
+git clone https://github.com/madooei/simple-logger simple-logging-workspace
+
+cd simple-logging-workspace
 ```
 
-This template is particularly useful for creating packages that are intended to be used locally so read the instructions below for local development.
+## Repository Structure
 
-### Local Development (Without Publishing to NPM)
+- `packages` — Contains the primary package(s) for this repository (e.g., `simple-logger`). Each package is self-contained and can be copied out and used independently.
+- `examples` — Contains examples of how to use the packages. Each example is a minimal, standalone project.
+- `playgrounds` — Contains demos of the dependencies of the primary package(s). Each playground is a minimal, standalone project.
+- `docs` — Contains various documentation for users and developers.
+- `.github` — Contains GitHub-specific files, such as workflows and issue templates.
 
-There are three ways to use this package locally:
+## How to Use This Repo
 
-#### Option 1: Using npm link
+- To work on a package, go to `packages/<package-name>` and follow its README.
+- To try an example, go to `examples/<example-name>` and follow its README.
+- To run the playground, go to `playground/<package-name>` and follow its README.
+- For documentation, see the `docs` folder.
 
-1. Clone this repository, install dependencies, build the package, and create a global symlink:
+### Using a VSCode Multi-root Workspace
 
-   ```bash
-   git clone <repository-url>
-   cd simple-logger/packages/simple-logger
-   # Install dependencies and build the package
-   npm install
-   npm run build
-   # Create a global symlink
-   npm link
-   ```
+With Visual Studio Code, you can enhance your development experience by using a multi-root workspace to access packages, examples, and playgrounds simultaneously. This approach is more efficient than opening the root directory, or each package or example separately.
 
-   Note: You can unlink the package later using `npm unlink`.
+To set up a multi-root workspace:
 
-2. In your other project where you want to use this package:
+1. Open Visual Studio Code.
+2. Navigate to `File > Open Workspace from File...`.
+3. Select the `simple-logger.code-workspace` file located at the root of the repository. This action will open all specified folders in one workspace.
 
-   ```bash
-   npm link @madooei/simple-logger
-   ```
-
-3. Import the package in your project:
-
-   ```typescript
-   import { LogManagerImpl, type Logger } from '@madooei/simple-logger';
-   ```
-
-#### Option 2: Using local path
-
-In your other project's `package.json`, add this package as a dependency using the local path:
+The `simple-logger.code-workspace` file can be customized to include different folders or settings. Here's a typical configuration:
 
 ```json
 {
-  "dependencies": {
-    "@madooei/simple-logger": "file:/path/to/simple-logger"
+  "folders": [
+    {
+      "path": "packages/simple-logger"
+    },
+    {
+      "path": "examples/simple"
+    },
+    {
+      "path": "playgrounds/empty"
+    }
+  ],
+  "settings": {
+    // Add any workspace-specific settings here, for example:
+    "git.openRepositoryInParentFolders": "always"
   }
 }
 ```
 
-You can use absolute or relative paths with the `file:` protocol.
+## Developing the Package
 
-Then run `npm install` in your project.
+Change to the package directory and install dependencies:
 
-Now you can import the package in your project as usual.
-
-#### Option 3: Using a local tarball (npm pack)
-
-1. Follow option 1 but instead of using `npm link`, create a tarball of the package:
-
-   ```bash
-   npm pack
-   ```
-
-   This will generate a file like `coursebook-simple-logger-1.0.0.tgz`. (Or whatever version you have.)
-   You can find the tarball in the same directory as your `package.json`.
-
-2. In your other project, install the tarball:
-
-   ```bash
-   npm install /absolute/path/to/simple-logger/coursebook-simple-logger-1.0.0.tgz
-   ```
-
-   Or, if you copy the tarball into your project directory:
-
-   ```bash
-   npm install ./coursebook-simple-logger-1.0.0.tgz
-   ```
-
-This method installs the package exactly as it would be published to npm, making it ideal for final testing. After this installation, you must have the package in your `node_modules` directory, and you can import it as usual. You will also see the package in your `package.json` file as a dependency:
-
-```json
-{
-  "dependencies": {
-    "@madooei/simple-logger": "file:coursebook-simple-logger-1.0.0.tgz"
-  }
-}
+```bash
+cd packages/simple-logger
+npm install
 ```
+
+- Read the [Project Roadmap](../../docs/ROADMAP.md) for project goals, status, evolution, and development guidelines.
+- Read the [Development Guide](DEVELOPMENT.md) for detailed information on the package architecture, build configuration, and implementation patterns.
+- Follow the [Contributing Guide](../../docs/CONTRIBUTING.md) for contribution guidelines, coding standards, and best practices.
+
+## Package Management
+
+When you are ready to publish your package:
+
+```bash
+npm run release
+```
+
+This single command will:
+
+- Validate your code with the full validation pipeline
+- Analyze commits to determine version bump
+- Update package.json version and changelog
+- Build the package
+- Create and push git tag
+- Create GitHub release
+- Publish to NPM
+
+> [!TIP]
+> For detailed information about package publishing, versioning, and local development workflows, see the [NPM Package Management Guide](../../docs/guides/npm-package.md).

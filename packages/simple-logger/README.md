@@ -1,9 +1,136 @@
 # Simple Logger
 
-A lightweight and minimal logging system for TypeScript projects that supports namespace-based logging with two log levels.
+A lightweight, flexible logging system for CourseBook that supports namespace-based logging with different log levels.
 
-> [!TIP]
-> Refer to this package's docs ([source](../../docs/index.md) or [website](https://madooei.github.io/simple-logger/)) for how to use it.
+**Features:**
+
+- Written in TypeScript
+- Builds to both modern ES modules and CommonJS formats
+- Provides TypeScript type definitions
+- ESLint for code linting
+- Prettier for code formatting
+- Vitest for testing
+- Tsup for building
+- Minimal dependencies
+
+## Installation
+
+```bash
+npm install @madooei/simple-logger
+```
+
+## Usage
+
+A lightweight, flexible logging system for CourseBook that supports namespace-based logging with different log levels.
+
+### Basic Usage
+
+```typescript
+import { LogManagerImpl, type Logger } from "@madooei/simple-logger";
+
+// Get the logger instance
+const logManager = LogManagerImpl.getInstance();
+
+// Create a logger for your component
+const logger: Logger = logManager.getLogger("myapp:component");
+
+// Log at different levels
+logger.trace("Detailed debugging");
+logger.info("General information");
+```
+
+### Setting Log Levels
+
+```typescript
+// Set level for specific namespace
+logManager.setLogLevel("myapp:component", "info");
+
+// Set level for all components in 'myapp'
+logManager.setLogLevel("myapp:*", "info");
+
+// Use regex pattern
+logManager.setLogLevel(/test:\d+/, "trace");
+
+// Set default level for everything
+logManager.setLogLevel("*", "info");
+```
+
+### Namespace Patterns
+
+- `component:` - Matches all loggers starting with 'component:'
+- `component:submodule` - Matches exact namespace
+- `/component:\d+/` - Matches using regex pattern
+- `*` - Matches all namespaces
+
+### Log Levels
+
+1. `trace` - Verbose debugging information
+2. `info` - Informational messages and errors
+
+When you set a log level, all levels of equal or higher severity will be logged:
+
+- Setting level to 'trace' shows trace and info logs
+- Setting level to 'info' shows only info logs
+
+### Why Only Two Log Levels?
+
+`info` is the default level for regular logging. It covers everything you would
+normally output with `console.log`, including warnings and errors that should be
+visible in production. `trace` is solely for debugging and is typically enabled
+only for a specific namespace during development. Restricting the hierarchy to
+these two levels keeps configuration simple while still letting you turn on
+detailed logs without flooding the console.
+
+### Enable/Disable Logging
+
+```typescript
+// Disable all logging
+logManager.disable();
+
+// Re-enable logging
+logManager.enable();
+```
+
+### Object Logging
+
+Objects are automatically pretty-printed:
+
+```typescript
+logger.info("Processing config", {
+  server: "localhost",
+  port: 3000,
+});
+
+// Output:
+// [INFO] [myapp:component] Processing config {
+//   "server": "localhost",
+//   "port": 3000
+// }
+```
+
+### Example Component Integration
+
+```typescript
+export class FileManager {
+  private logger: Logger;
+
+  constructor() {
+    this.logger = LogManagerImpl.getInstance().getLogger("filemanager");
+  }
+
+  async readFile(path: string): Promise<Buffer> {
+    this.logger.trace("Reading file:", path);
+    try {
+      const content = await readFile(path);
+      this.logger.info("Successfully read file:", path);
+      return content;
+    } catch (error) {
+      this.logger.info("Failed to read file:", path, error);
+      throw error;
+    }
+  }
+}
+```
 
 ## Features
 
@@ -14,170 +141,93 @@ A lightweight and minimal logging system for TypeScript projects that supports n
 - **Global Enable/Disable**: Quickly toggle all logging
 - **Singleton Pattern**: Centralized logging control
 
-## Implementation Details
+## Cloning the Repository
 
-### Logger Class
+To make your workflow more organized, it's a good idea to clone this repository into a directory named `simple-logging-workspace`. This helps differentiate the workspace from the `simple-logger` located in the `packages` directory.
 
-- Handles actual logging operations
-- Prefixes logs with level and namespace
-- Formats objects for better readability
+```bash
+git clone https://github.com/madooei/simple-logger simple-logging-workspace
 
-### LogManager Class
+cd simple-logging-workspace
+```
 
-- Singleton pattern for global access
-- Manages logger instances
-- Controls log levels and patterns
-- Handles enable/disable state
+## Repository Structure
 
-## Best Practices
+- `packages` — Contains the primary package(s) for this repository (e.g., `simple-logger`). Each package is self-contained and can be copied out and used independently.
+- `examples` — Contains examples of how to use the packages. Each example is a minimal, standalone project.
+- `playgrounds` — Contains demos of the dependencies of the primary package(s). Each playground is a minimal, standalone project.
+- `docs` — Contains various documentation for users and developers.
+- `.github` — Contains GitHub-specific files, such as workflows and issue templates.
 
-1. **Namespace Convention**:
+## How to Use This Repo
 
-   - Use colon-separated hierarchies: `component:subcomponent:operation`
-   - Keep namespaces consistent across related code
+- To work on a package, go to `packages/<package-name>` and follow its README.
+- To try an example, go to `examples/<example-name>` and follow its README.
+- To run the playground, go to `playground/<package-name>` and follow its README.
+- For documentation, see the `docs` folder.
 
-2. **Log Level Usage**:
+### Using a VSCode Multi-root Workspace
 
-   - `trace`: Detailed debugging information
-   - `info`: General logging, warnings, and errors
+With Visual Studio Code, you can enhance your development experience by using a multi-root workspace to access packages, examples, and playgrounds simultaneously. This approach is more efficient than opening the root directory, or each package or example separately.
 
-3. **Pattern Usage**:
-   - Use specific patterns for fine-grained control
-   - Use broader patterns for general configuration
-   - Order patterns from specific to general
+To set up a multi-root workspace:
 
-## Development
+1. Open Visual Studio Code.
+2. Navigate to `File > Open Workspace from File...`.
+3. Select the `simple-logger.code-workspace` file located at the root of the repository. This action will open all specified folders in one workspace.
 
-### Setup
+The `simple-logger.code-workspace` file can be customized to include different folders or settings. Here's a typical configuration:
 
-1. Install dependencies:
+```json
+{
+  "folders": [
+    {
+      "path": "packages/simple-logger"
+    },
+    {
+      "path": "examples/simple"
+    },
+    {
+      "path": "playgrounds/empty"
+    }
+  ],
+  "settings": {
+    // Add any workspace-specific settings here, for example:
+    "git.openRepositoryInParentFolders": "always"
+  }
+}
+```
 
-   ```bash
-   npm install
-   ```
+## Developing the Package
 
-2. Start development:
+Change to the package directory and install dependencies:
 
-   ```bash
-   npm run dev
-   ```
+```bash
+cd packages/simple-logger
+npm install
+```
 
-### Available Scripts
+- Read the [Project Roadmap](../../docs/ROADMAP.md) for project goals, status, evolution, and development guidelines.
+- Read the [Development Guide](DEVELOPMENT.md) for detailed information on the package architecture, build configuration, and implementation patterns.
+- Follow the [Contributing Guide](../../docs/CONTRIBUTING.md) for contribution guidelines, coding standards, and best practices.
 
-- `npm run build` - Build the package
-- `npm run dev` - Run in development mode with watch
-- `npm start` - Run the package
-- `npm run debug` - Run with debugger attached
-- `npm test` - Run tests
-- `npm run test:watch` - Run tests in watch mode
-- `npm run test:coverage` - Run tests with coverage
-- `npm run test:ui` - Run tests with UI
-- `npm run lint` - Run ESLint
-- `npm run lint:fix` - Fix ESLint errors
-- `npm run format` - Check code formatting
-- `npm run format:fix` - Format code with Prettier
-- `npm run validate` - Run all checks (types, lint, format, tests)
-- `npm run clean` - Clean the package (remove dist and coverage)
-- `npm run clean:all` - Clean the package and all dependencies (remove dist, coverage, and node_modules)
-- `npm run release` - Create a new release (bump version, update changelog, create tag)
+## Package Management
 
-## Release & Publish Workflow
+When you are ready to publish your package:
 
-### Automated Versioning and Changelog
+```bash
+npm run release
+```
 
-This package uses [`standard-version`](https://github.com/conventional-changelog/standard-version) to automate versioning and changelog updates. To create a new release:
+This single command will:
 
-1. Make sure all your changes are committed.
+- Validate your code with the full validation pipeline
+- Analyze commits to determine version bump
+- Update package.json version and changelog
+- Build the package
+- Create and push git tag
+- Create GitHub release
+- Publish to NPM
 
-2. Run:
-
-   ```bash
-   npm run release
-   ```
-
-   This will:
-
-   - Bump the version in `package.json` according to your commit messages (using [Conventional Commits](https://www.conventionalcommits.org/)).
-   - Update `CHANGELOG.md` with a summary of changes.
-   - Create a new Git tag for the release.
-
-3. Push your changes and tags:
-
-   ```bash
-   git push && git push --tags
-   ```
-
-### Publishing to NPM via GitHub Actions
-
-This repository is set up to publish the package to NPM automatically using GitHub Actions:
-
-- **When does it publish?**
-
-  - When you create a new GitHub Release (from the GitHub UI or by pushing a tag and creating a release), or
-  - When you manually trigger the workflow from the GitHub Actions tab.
-
-- **What does it do?**
-  - Installs dependencies, runs all validation (type-check, lint, format, tests), builds the package, and publishes to NPM if all checks pass.
-
-> [!NOTE]
-> You must add your NPM token as a secret named `NPM_TOKEN` in your GitHub repository settings for publishing to work.
-
-## TODO List (Priority Order)
-
-### Highest Priority (Philosophy)
-
-We need to have only two log levels: `trace` and `info`.
-
-The `info` level, which is the default, should be used for general logging. This is where you put `console.log` statements that you want to see in production. You print information that is useful (e.g., server started, etc.), warnings, and errors.
-
-The `trace` level should be used for debugging purposes. This is where you put `DEBUG && console.log()` statements that you only want to see when debugging. The problem this library solves is that you can scope the logging to a specific namespace, so you can turn on debugging for a specific part of your code without cluttering the console with logs from other parts.
-
-### High Priority (Core Issues)
-
-1. **Fix argument processing performance** - Move `JSON.stringify` inside the log output check to avoid processing when logs are filtered out
-
-2. **Fix pattern matching precedence logic** - Make RegExp patterns take higher priority than wildcard patterns, clarify length-based matching rules
-
-3. **Add proper error handling** - Use defined `LogManagerError` types, validate log levels, handle edge cases in pattern matching
-
-4. **Add environment variable support** - Read log levels from `LOG_LEVEL` or similar env vars with code-level overrides
-
-5. **Implement logger cleanup mechanism** - Prevent memory leaks from cached logger instances in long-running apps
-
-### Medium Priority (Functionality)
-
-6. **Add lazy evaluation for expensive log operations** - Support function arguments that are only evaluated when logging
-
-7. **Improve pattern matching edge cases** - Handle overlapping patterns more predictably, add tests for complex scenarios
-
-8. **Add structured metadata support** - Allow attaching key-value pairs to log entries (requestId, userId, etc.)
-
-9. **Add basic configuration validation** - Ensure namespace patterns and log levels are valid
-
-### Low Priority (Nice-to-Have)
-
-10. **Add console color output** - Color-code log levels
-
-11. **Add pluggable output destinations** - Support file writing, external services beyond console
-
-12. **Add custom log formatting** - Allow timestamp, custom prefixes, JSON output format
-
-13. **Add log filtering beyond level** - Content-based filters, rate limiting
-
-14. **Add async logging support** - Non-blocking log operations for high-throughput scenarios
-
-15. **Add log rotation/management** - File size limits, cleanup policies
-
-## Extending Log Levels
-
-If you need more granular logging, fork this repository and adjust the source
-code:
-
-1. **Add your levels** in `src/types.ts` by extending the `LogLevel` union in the
-   order of lowest to highest priority.
-2. **Update `shouldLog`** in `src/index.ts` so the `levels` array reflects your
-   new hierarchy.
-3. **Create logger methods** for each level in `Logger` and `LoggerImpl`.
-4. Update tests and docs to describe the additional levels.
-
-With these changes you can introduce higher or lower priority levels as needed.
+> [!TIP]
+> For detailed information about package publishing, versioning, and local development workflows, see the [NPM Package Management Guide](../../docs/guides/npm-package.md).
