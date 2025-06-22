@@ -8,17 +8,15 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [0.1.8](https://github.com/madooei/simple-logger/compare/v0.1.7...v0.1.8) (2025-06-20)
 
-
 ### Features
 
-* implement GitHub Actions workflow for package publishing and release creation ([44f8076](https://github.com/madooei/simple-logger/commit/44f807609e307aa42a430edf678693163e559ace))
+- implement GitHub Actions workflow for package publishing and release creation ([44f8076](https://github.com/madooei/simple-logger/commit/44f807609e307aa42a430edf678693163e559ace))
 
 ### [0.1.7](https://github.com/madooei/simple-logger/compare/v0.1.6...v0.1.7) (2025-06-20)
 
-
 ### Bug Fixes
 
-* update package.json to include additional files in the package ([bac9ee4](https://github.com/madooei/simple-logger/commit/bac9ee46a8fdf4203fd491b2de356b09443e0983))
+- update package.json to include additional files in the package ([bac9ee4](https://github.com/madooei/simple-logger/commit/bac9ee46a8fdf4203fd491b2de356b09443e0983))
 
 ### [0.1.6](https://github.com/madooei/simple-logger/compare/v0.1.5...v0.1.6) (2025-06-20)
 
