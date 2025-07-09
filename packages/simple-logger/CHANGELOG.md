@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+
+
+# [0.3.0](https://github.com/madooei/simple-logger/compare/v0.2.0...v0.3.0) (2025-07-09)
+
+
+### Features
+
+* add simple logger VSCode extension example ([5b61628](https://github.com/madooei/simple-logger/commit/5b616283f6099786eabb0a62c1f867ccb1de92c0))
+* add support for custom log functions and enhance logging flexibility ([e72d197](https://github.com/madooei/simple-logger/commit/e72d197757e86b99abb157c0c438cc2df3070387))
+* enhance changelog management and update ESLint configuration ([2b46ff1](https://github.com/madooei/simple-logger/commit/2b46ff19dc5ce3d5e4c226cc4e19f92f8dba910e))
+
 ## [0.1.10](https://github.com/madooei/simple-logger/compare/v0.1.9...v0.1.10) (2025-06-20)
 
 ## [0.1.9](https://github.com/madooei/simple-logger/compare/v0.1.8...v0.1.9) (2025-06-20)
