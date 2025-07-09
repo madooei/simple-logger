@@ -10,7 +10,7 @@
 			"path": "examples/simple"
 		},
 		{
-			"path": "playgrounds/empty"
+			"path": "examples/vscode-extension"
 		}
 	],
 	"settings": {
