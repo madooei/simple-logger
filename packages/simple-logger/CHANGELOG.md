@@ -1,23 +1,6 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
-## [Unreleased]
-
-### Features
-
-- enhance changelog management and update ESLint configuration
-- add simple logger VSCode extension example
-- add support for custom log functions and enhance logging flexibility
-
-### Documentation
-
-- sync README to docs/index.md
-
-### Chores
-
-- update .gitignore to include CLAUDE.md and ensure proper formatting
-- remove empty playground files and update workspace to point to new example
+All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [0.1.10](https://github.com/madooei/simple-logger/compare/v0.1.9...v0.1.10) (2025-06-20)
 

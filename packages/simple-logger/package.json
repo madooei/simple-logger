@@ -58,7 +58,7 @@
     "validate": "npm run type-check && npm run lint:fix && npm run format:fix && npm run test"
   },
   "devDependencies": {
-    "@release-it/keep-a-changelog": "^7.0.0",
+    "@release-it/conventional-changelog": "^10.0.1",
     "@types/node": "^22.15.3",
     "@vitest/coverage-v8": "^3.1.2",
     "@vitest/ui": "^3.1.2",
