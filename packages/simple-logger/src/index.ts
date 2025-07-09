@@ -5,6 +5,7 @@ import type {
   NamespacePattern,
   LogManagerError,
   LogManagerErrorType,
+  LogFunction,
 } from "./types";
 
 class LoggerImpl implements Logger {
@@ -27,10 +28,13 @@ export class LogManagerImpl implements LogManager {
   private logLevels: Map<NamespacePattern, LogLevel> = new Map();
   private loggers: Map<string, Logger> = new Map();
   private enabled: boolean = true;
+  private logFunction: LogFunction;
 
   private constructor() {
     // Default to info level for all namespaces
     this.setLogLevel("*", "info");
+    // Initialize with default log function
+    this.logFunction = this.defaultLogFunction;
   }
 
   static getInstance(): LogManagerImpl {
@@ -60,6 +64,30 @@ export class LogManagerImpl implements LogManager {
   disable(): void {
     this.enabled = false;
   }
+
+  setLogFunction(logFunction: LogFunction): void {
+    this.logFunction = logFunction;
+  }
+
+  resetLogFunction(): void {
+    this.logFunction = this.defaultLogFunction;
+  }
+
+  private defaultLogFunction: LogFunction = (
+    level: LogLevel,
+    namespace: string,
+    ...args: any[]
+  ) => {
+    const prefix = `[${level.toUpperCase()}] [${namespace}]`;
+    console.log(
+      prefix,
+      ...args.map((arg) =>
+        typeof arg === "object" && arg !== null
+          ? JSON.stringify(arg, null, 2)
+          : arg,
+      ),
+    );
+  };
 
   private matchesStringPattern(namespace: string, pattern: string): boolean {
     if (pattern === "*") return true;
@@ -132,15 +160,7 @@ export class LogManagerImpl implements LogManager {
 
   log(namespace: string, level: LogLevel, ...args: any[]): void {
     if (this.shouldLog(namespace, level)) {
-      const prefix = `[${level.toUpperCase()}] [${namespace}]`;
-      console.log(
-        prefix,
-        ...args.map((arg) =>
-          typeof arg === "object" && arg !== null
-            ? JSON.stringify(arg, null, 2)
-            : arg,
-        ),
-      );
+      this.logFunction(level, namespace, ...args);
     }
   }
 }
@@ -152,4 +172,5 @@ export type {
   NamespacePattern,
   LogManagerError,
   LogManagerErrorType,
+  LogFunction,
 };

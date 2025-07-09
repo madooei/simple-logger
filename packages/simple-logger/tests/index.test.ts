@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
-import { LogManagerImpl } from "@/index";
+import { LogManagerImpl, type LogFunction } from "@/index";
 
 describe("LogManager", () => {
   let logManager: LogManagerImpl;
@@ -215,6 +215,110 @@ describe("LogManager", () => {
         "[INFO] [test]",
         "value",
         null,
+      );
+    });
+  });
+
+  describe("Custom Log Function", () => {
+    it("should use custom log function when set", () => {
+      const mockLogFunction = vi.fn();
+      logManager.setLogFunction(mockLogFunction);
+
+      const logger = logManager.getLogger("test");
+      logger.info("test message", { key: "value" });
+
+      expect(mockLogFunction).toHaveBeenCalledWith(
+        "info",
+        "test",
+        "test message",
+        { key: "value" },
+      );
+      expect(consoleMock.log).not.toHaveBeenCalled();
+    });
+
+    it("should pass correct parameters to custom log function", () => {
+      const mockLogFunction = vi.fn();
+      logManager.setLogFunction(mockLogFunction);
+      logManager.setLogLevel("app:component", "trace"); // Enable trace level
+
+      const logger = logManager.getLogger("app:component");
+      logger.trace("debug info", 42, null);
+
+      expect(mockLogFunction).toHaveBeenCalledWith(
+        "trace",
+        "app:component",
+        "debug info",
+        42,
+        null,
+      );
+    });
+
+    it("should reset to default console.log behavior", () => {
+      const mockLogFunction = vi.fn();
+      logManager.setLogFunction(mockLogFunction);
+
+      const logger = logManager.getLogger("test");
+      logger.info("with custom");
+
+      expect(mockLogFunction).toHaveBeenCalledWith(
+        "info",
+        "test",
+        "with custom",
+      );
+      expect(consoleMock.log).not.toHaveBeenCalled();
+
+      logManager.resetLogFunction();
+      logger.info("back to default");
+
+      expect(consoleMock.log).toHaveBeenCalledWith(
+        "[INFO] [test]",
+        "back to default",
+      );
+    });
+
+    it("should respect log levels with custom function", () => {
+      const mockLogFunction = vi.fn();
+      logManager.setLogFunction(mockLogFunction);
+      logManager.setLogLevel("test", "info");
+
+      const logger = logManager.getLogger("test");
+      logger.trace("should not appear");
+      logger.info("should appear");
+
+      expect(mockLogFunction).toHaveBeenCalledOnce();
+      expect(mockLogFunction).toHaveBeenCalledWith(
+        "info",
+        "test",
+        "should appear",
+      );
+    });
+
+    it("should respect enable/disable with custom function", () => {
+      const mockLogFunction = vi.fn();
+      logManager.setLogFunction(mockLogFunction);
+
+      const logger = logManager.getLogger("test");
+
+      logManager.disable();
+      logger.info("disabled");
+
+      logManager.enable();
+      logger.info("enabled");
+
+      expect(mockLogFunction).toHaveBeenCalledOnce();
+      expect(mockLogFunction).toHaveBeenCalledWith("info", "test", "enabled");
+    });
+
+    it("should maintain backward compatibility with default behavior", () => {
+      const logger = logManager.getLogger("test");
+      const testObj = { foo: "bar" };
+
+      logger.info("test", testObj);
+
+      expect(consoleMock.log).toHaveBeenCalledWith(
+        "[INFO] [test]",
+        "test",
+        JSON.stringify(testObj, null, 2),
       );
     });
   });
