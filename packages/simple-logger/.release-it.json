@@ -11,10 +11,7 @@
   },
   "github": {
     "release": true,
-    "releaseName": "v${version}",
-    "autoGenerate": {
-      "changelog": true
-    }
+    "releaseName": "v${version}"
   },
   "hooks": {
     "before:init": ["npm run validate"],
