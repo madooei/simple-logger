@@ -22,3 +22,6 @@
 **/.env.*.local
 
 **/.nyc_output/ 
+
+# Local Files
+CLAUDE.md
