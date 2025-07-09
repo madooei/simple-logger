@@ -25,6 +25,7 @@
       "preset": "angular",
       "infile": "CHANGELOG.md",
       "header": "# Changelog\n\nAll notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.\n\n",
+      "ignoreRecommendedBump": true,
       "types": [
         { "type": "feat", "section": "🚀 Features" },
         { "type": "fix", "section": "🐛 Bug Fixes" },
