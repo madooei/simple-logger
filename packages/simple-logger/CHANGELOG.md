@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [Unreleased]
 
+### Features
+
+- enhance changelog management and update ESLint configuration
+- add simple logger VSCode extension example
+- add support for custom log functions and enhance logging flexibility
+
+### Documentation
+
+- sync README to docs/index.md
+
+### Chores
+
+- update .gitignore to include CLAUDE.md and ensure proper formatting
+- remove empty playground files and update workspace to point to new example
+
 ## [0.1.10](https://github.com/madooei/simple-logger/compare/v0.1.9...v0.1.10) (2025-06-20)
 
 ## [0.1.9](https://github.com/madooei/simple-logger/compare/v0.1.8...v0.1.9) (2025-06-20)
