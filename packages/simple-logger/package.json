@@ -2,10 +2,22 @@
   "name": "@madooei/simple-logger",
   "version": "0.2.0",
   "description": "A simple logger for TypeScript projects",
+  "keywords": [
+    "logger",
+    "typescript"
+  ],
+  "homepage": "https://madooei.github.io/simple-logger/",
+  "bugs": {
+    "url": "https://github.com/madooei/simple-logger/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/madooei/simple-logger.git"
+  },
+  "license": "MIT",
+  "author": "Ali Madooei",
+  "sideEffects": false,
   "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "exports": {
     "import": {
       "types": "./dist/index.d.ts",
@@ -16,47 +28,37 @@
       "require": "./dist/index.cjs"
     }
   },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist",
     "README.md",
     "CHANGELOG.md"
   ],
-  "keywords": [
-    "logger",
-    "typescript"
-  ],
-  "author": "Ali Madooei",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/madooei/simple-logger.git"
-  },
-  "homepage": "https://madooei.github.io/simple-logger/",
-  "bugs": {
-    "url": "https://github.com/madooei/simple-logger/issues"
-  },
   "scripts": {
-    "start": "tsx --no-warnings ./src/index.ts",
-    "debug": "tsx --inspect-brk ./src/index.ts",
-    "dev": "tsx watch ./src/index.ts",
     "prebuild": "npm run validate",
     "build": "tsup",
-    "prepublishOnly": "npm run build",
-    "type-check": "tsc --noEmit --project tsconfig.build.json",
-    "lint": "eslint ",
-    "lint:fix": "eslint --fix",
-    "format": "prettier --check .",
-    "format:fix": "prettier --write .",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage",
-    "test:ui": "vitest --ui",
-    "validate": "npm run type-check && npm run lint:fix && npm run format:fix && npm run test",
     "clean": "rm -rf dist coverage",
     "clean:all": "rm -rf dist coverage node_modules",
-    "release": "release-it"
+    "debug": "tsx --inspect-brk ./src/index.ts",
+    "dev": "tsx watch ./src/index.ts",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "lint": "eslint ",
+    "lint:fix": "eslint --fix",
+    "prepublishOnly": "npm run build",
+    "release": "release-it",
+    "start": "tsx --no-warnings ./src/index.ts",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui",
+    "test:watch": "vitest",
+    "type-check": "tsc --noEmit --project tsconfig.build.json",
+    "validate": "npm run type-check && npm run lint:fix && npm run format:fix && npm run test"
   },
   "devDependencies": {
+    "@release-it/keep-a-changelog": "^7.0.0",
     "@types/node": "^22.15.3",
     "@vitest/coverage-v8": "^3.1.2",
     "@vitest/ui": "^3.1.2",
@@ -70,5 +72,8 @@
     "typescript": "^5.0.0",
     "typescript-eslint": "^8.31.1",
     "vitest": "^3.1.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
