@@ -132,6 +132,88 @@ export class FileManager {
 }
 ```
 
+### Custom Log Functions
+
+You can customize how logs are output by providing a custom log function:
+
+```typescript
+import { LogManagerImpl, type LogFunction } from "@madooei/simple-logger";
+
+const logManager = LogManagerImpl.getInstance();
+
+// Custom log function that formats differently
+const customLogFunction: LogFunction = (level, namespace, ...args) => {
+  const timestamp = new Date().toISOString();
+  const message = `${timestamp} [${level.toUpperCase()}] ${namespace}: ${args.join(" ")}`;
+  console.log(message);
+};
+
+// Set the custom log function
+logManager.setLogFunction(customLogFunction);
+
+// Now all loggers will use your custom function
+const logger = logManager.getLogger("myapp");
+logger.info("This will use custom formatting");
+
+// Reset to default console.log behavior
+logManager.resetLogFunction();
+```
+
+#### VSCode Extension Example
+
+```typescript
+import * as vscode from "vscode";
+import { LogManagerImpl, type LogFunction } from "@madooei/simple-logger";
+
+const vscodeLogFunction: LogFunction = (level, namespace, ...args) => {
+  const message = `[${level.toUpperCase()}] [${namespace}] ${args.join(" ")}`;
+  vscode.window.showInformationMessage(message);
+};
+
+const logManager = LogManagerImpl.getInstance();
+logManager.setLogFunction(vscodeLogFunction);
+
+// Now logs appear as VSCode information messages
+const logger = logManager.getLogger("extension:main");
+logger.info("Extension activated!");
+```
+
+#### Custom Formatting Examples
+
+```typescript
+// Colorized console output
+const colorLogFunction: LogFunction = (level, namespace, ...args) => {
+  const colors = { trace: "\x1b[36m", info: "\x1b[32m" };
+  const reset = "\x1b[0m";
+  const color = colors[level] || "";
+
+  console.log(
+    `${color}[${level.toUpperCase()}]${reset} ${namespace}:`,
+    ...args,
+  );
+};
+
+// JSON structured logging
+const jsonLogFunction: LogFunction = (level, namespace, ...args) => {
+  const logEntry = {
+    timestamp: new Date().toISOString(),
+    level: level.toUpperCase(),
+    namespace,
+    message: args.join(" "),
+  };
+  console.log(JSON.stringify(logEntry));
+};
+
+// Multiple outputs
+const multiOutputLogFunction: LogFunction = (level, namespace, ...args) => {
+  const message = `[${level.toUpperCase()}] [${namespace}] ${args.join(" ")}`;
+
+  console.log(message); // Console
+  sendToLogServer(message); // External logging
+  writeToFile(message); // File logging
+};
+```
+
 ## Features
 
 - **Namespace-based Logging**: Organize logs by component and operation
@@ -140,6 +222,8 @@ export class FileManager {
 - **Object Serialization**: Automatically pretty-print objects
 - **Global Enable/Disable**: Quickly toggle all logging
 - **Singleton Pattern**: Centralized logging control
+- **Custom Log Functions**: Replace default console.log with custom output handlers
+- **Flexible Output**: Support for VSCode messages, file logging, external services, and more
 
 ## Cloning the Repository
 
