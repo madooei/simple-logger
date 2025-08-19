@@ -81,11 +81,18 @@ export class LogManagerImpl implements LogManager {
     const prefix = `[${level.toUpperCase()}] [${namespace}]`;
     console.log(
       prefix,
-      ...args.map((arg) =>
-        typeof arg === "object" && arg !== null
-          ? JSON.stringify(arg, null, 2)
-          : arg,
-      ),
+      ...args.map((arg) => {
+        // Pass Error objects through directly - console.log handles them well
+        if (arg instanceof Error) {
+          return arg;
+        }
+        // Handle other objects
+        if (typeof arg === "object" && arg !== null) {
+          return JSON.stringify(arg, null, 2);
+        }
+        // Handle primitives
+        return arg;
+      }),
     );
   };
 

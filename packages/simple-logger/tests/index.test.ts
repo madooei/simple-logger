@@ -217,6 +217,20 @@ describe("LogManager", () => {
         null,
       );
     });
+
+    it("should properly handle Error objects", () => {
+      const logger = logManager.getLogger("test");
+      const testError = new Error("Test error message");
+      testError.name = "TestError";
+
+      logger.info("error occurred", testError);
+
+      expect(consoleMock.log).toHaveBeenCalledWith(
+        "[INFO] [test]",
+        "error occurred",
+        testError,
+      );
+    });
   });
 
   describe("Custom Log Function", () => {
