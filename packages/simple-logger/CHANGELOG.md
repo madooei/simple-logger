@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+
+
+## [0.3.1](https://github.com/madooei/simple-logger/compare/v0.3.0...v0.3.1) (2025-08-19)
+
+
+### Bug Fixes
+
+* remove conflicting GitHub autoGenerate changelog setting ([1ae63fa](https://github.com/madooei/simple-logger/commit/1ae63faee0681208e4b71d7c2d49971ecbfcae09))
+
+
+### Features
+
+* enhance logging functionality to handle Error objects directly ([0328a29](https://github.com/madooei/simple-logger/commit/0328a297e733fe46a2fa189688bf1ee490f41ce7))
+
 # [0.3.0](https://github.com/madooei/simple-logger/compare/v0.2.0...v0.3.0) (2025-07-09)
 
 ### Features
