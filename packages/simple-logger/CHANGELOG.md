@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+
+
+## [0.3.2](https://github.com/madooei/simple-logger/compare/v0.3.1...v0.3.2) (2025-08-23)
+
+
+### Features
+
+* introduce 'none' log level to disable logging for specific namespaces ([091ba60](https://github.com/madooei/simple-logger/commit/091ba6035d037c62ed3d11d17f1cdf5af723caed))
+
 ## [0.3.1](https://github.com/madooei/simple-logger/compare/v0.3.0...v0.3.1) (2025-08-19)
 
 ### Bug Fixes
