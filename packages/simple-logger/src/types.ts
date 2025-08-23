@@ -20,7 +20,7 @@ export class LogManagerError extends Error {
   }
 }
 
-export type LogLevel = "trace" | "info";
+export type LogLevel = "none" | "trace" | "info";
 export type NamespacePattern = string | RegExp;
 
 /**

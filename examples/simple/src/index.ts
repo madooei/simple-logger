@@ -1,16 +1,32 @@
-import { LogManagerImpl, type Logger } from '@madooei/simple-logger';
+import { LogManagerImpl } from "@madooei/simple-logger";
 
-// Get the logger instance
 const logManager = LogManagerImpl.getInstance();
 
-// Create a logger for your component
-const logger: Logger = logManager.getLogger('myapp:component');
+// Set default log level to info
+logManager.setLogLevel("*", "info");
 
-// Try running with different log levels
-// logManager.setLogLevel('myapp:component', 'trace');
-logManager.setLogLevel('myapp:component', 'info');
-// logManager.disable();
+// Create loggers for different components
+const userLogger = logManager.getLogger("app:user");
+const authLogger = logManager.getLogger("app:auth");
+const debugLogger = logManager.getLogger("app:debug");
 
-// Log at different levels
-logger.trace('Detailed debugging');
-logger.info('General information');
+console.log("=== Initial logging (info level) ===");
+userLogger.info("User logged in");
+authLogger.info("Authentication successful");
+debugLogger.info("Debug info");
+
+console.log("\n=== Setting debug component to trace level ===");
+logManager.setLogLevel("app:debug", "trace");
+debugLogger.trace("Detailed debug trace");
+debugLogger.info("Debug info with trace enabled");
+
+console.log("\n=== Setting auth component to none (disabled) ===");
+logManager.setLogLevel("app:auth", "none");
+userLogger.info("User action");
+authLogger.info("This won't be logged");
+authLogger.trace("This also won't be logged");
+debugLogger.trace("Debug trace still works");
+
+console.log("\n=== Re-enabling auth component ===");
+logManager.setLogLevel("app:auth", "info");
+authLogger.info("Auth logging is back!");

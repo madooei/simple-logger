@@ -163,6 +163,49 @@ describe("LogManager", () => {
         "trace",
       );
     });
+
+    it("should disable logging when level is set to none", () => {
+      const logger = logManager.getLogger("test");
+
+      logManager.setLogLevel("*", "info");
+      logManager.setLogLevel("test", "none");
+
+      logger.trace("trace");
+      logger.info("info");
+
+      expect(consoleMock.log).not.toHaveBeenCalled();
+    });
+
+    it("should disable specific namespaces with none while keeping others enabled", () => {
+      const logger1 = logManager.getLogger("app:component1");
+      const logger2 = logManager.getLogger("app:component2");
+
+      logManager.setLogLevel("*", "info");
+      logManager.setLogLevel("app:component1", "none");
+      logManager.setLogLevel("app:component2", "trace");
+
+      logger1.trace("trace1");
+      logger1.info("info1");
+      logger2.trace("trace2");
+      logger2.info("info2");
+
+      expect(consoleMock.log).not.toHaveBeenCalledWith(
+        "[TRACE] [app:component1]",
+        "trace1",
+      );
+      expect(consoleMock.log).not.toHaveBeenCalledWith(
+        "[INFO] [app:component1]",
+        "info1",
+      );
+      expect(consoleMock.log).toHaveBeenCalledWith(
+        "[TRACE] [app:component2]",
+        "trace2",
+      );
+      expect(consoleMock.log).toHaveBeenCalledWith(
+        "[INFO] [app:component2]",
+        "info2",
+      );
+    });
   });
 
   describe("Enable/Disable", () => {

@@ -161,6 +161,11 @@ export class LogManagerImpl implements LogManager {
     messageLevel: LogLevel,
     configuredLevel: LogLevel,
   ): boolean {
+    // If configured level is "none", never log anything
+    if (configuredLevel === "none") {
+      return false;
+    }
+
     const levels: LogLevel[] = ["trace", "info"];
     return levels.indexOf(messageLevel) >= levels.indexOf(configuredLevel);
   }

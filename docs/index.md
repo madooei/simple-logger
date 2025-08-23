@@ -53,6 +53,9 @@ logManager.setLogLevel(/test:\d+/, "trace");
 
 // Set default level for everything
 logManager.setLogLevel("*", "info");
+
+// Disable logging for specific namespace
+logManager.setLogLevel("myapp:debug", "none");
 ```
 
 ### Namespace Patterns
@@ -64,31 +67,41 @@ logManager.setLogLevel("*", "info");
 
 ### Log Levels
 
-1. `trace` - Verbose debugging information
-2. `info` - Informational messages and errors
+1. `none` - Disables all logging for the namespace
+2. `trace` - Verbose debugging information
+3. `info` - Informational messages and errors
 
 When you set a log level, all levels of equal or higher severity will be logged:
 
+- Setting level to 'none' disables all logging for that namespace
 - Setting level to 'trace' shows trace and info logs
 - Setting level to 'info' shows only info logs
 
-### Why Only Two Log Levels?
+### Simple Log Level Design
 
-`info` is the default level for regular logging. It covers everything you would
-normally output with `console.log`, including warnings and errors that should be
-visible in production. `trace` is solely for debugging and is typically enabled
-only for a specific namespace during development. Restricting the hierarchy to
-these two levels keeps configuration simple while still letting you turn on
-detailed logs without flooding the console.
+The logging system uses a minimal three-level hierarchy: `none`, `trace`, and `info`.
+
+- `none` allows you to completely disable logging for specific namespaces while keeping others active
+- `info` is the default level for regular logging, covering everything you would normally output with `console.log`, including warnings and errors that should be visible in production
+- `trace` is solely for debugging and is typically enabled only for specific namespaces during development
+
+This simple hierarchy keeps configuration straightforward while providing the flexibility to selectively disable noisy components or enable detailed debugging where needed.
 
 ### Enable/Disable Logging
 
 ```typescript
-// Disable all logging
+// Disable all logging globally
 logManager.disable();
 
-// Re-enable logging
+// Re-enable logging globally
 logManager.enable();
+
+// Disable logging for specific namespaces using "none" level
+logManager.setLogLevel("myapp:debug", "none");
+logManager.setLogLevel("noisy:*", "none");
+
+// Re-enable by setting to a different level
+logManager.setLogLevel("myapp:debug", "info");
 ```
 
 ### Object Logging
@@ -130,6 +143,18 @@ export class FileManager {
     }
   }
 }
+
+// Configure logging levels
+const logManager = LogManagerImpl.getInstance();
+
+// Enable trace logging for file operations during development
+logManager.setLogLevel("filemanager", "trace");
+
+// Disable logging for a noisy third-party component
+logManager.setLogLevel("external:verbose-lib", "none");
+
+// Keep default info level for everything else
+logManager.setLogLevel("*", "info");
 ```
 
 ### Custom Log Functions
@@ -218,7 +243,7 @@ const multiOutputLogFunction: LogFunction = (level, namespace, ...args) => {
 
 - **Namespace-based Logging**: Organize logs by component and operation
 - **Pattern Matching**: Control log levels using string prefixes or regex patterns
-- **Log Level Hierarchy**: trace → info
+- **Log Level Hierarchy**: none → trace → info
 - **Object Serialization**: Automatically pretty-print objects
 - **Global Enable/Disable**: Quickly toggle all logging
 - **Singleton Pattern**: Centralized logging control
